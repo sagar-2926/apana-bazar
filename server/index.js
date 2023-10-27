@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import Product  from './model/products.js';
 dotenv.config();
 
 import User from './model/user.js';
@@ -78,8 +79,106 @@ const connectDB = async () => {
         message:"Invalid credentials"
     });
 }
+  });
+
+  //get / products
+
+  app.get('/products',async (req, res) => {
+     const products = await Product.find();
+    
+     res.json({
+      success:true,
+      data:products,
+      message: 'Product fetched successfully'
+     });
 
 
+  });
+
+  //post product
+
+  app.post('/product',async (req, res) => {
+    const {name,description,price,category,brand,Image} = req.body;
+    const product = new Product({
+      name: name,
+      description: description,
+      price:price,
+      category: category,
+      brand: brand,
+      Image: Image
+    });
+    try{
+      const savedProduct = await product.save();
+    
+     res.json({
+      success: true,
+      data:savedProduct,
+      message:"Product saved successfully"
+     });
+    }
+    catch(e) {
+      res.json({
+        success: false,
+        message: e.message
+      });
+    }
+  });
+
+  //get / product/:id
+   app.get("/product/:_id",async (req,res) =>{
+    const {_id} = req.params;
+
+    const product = await Product.findById({_id: _id});
+    res.json({
+      success: true,
+      data: product,
+      message: "Product fetch successfully"
+    });
+   });
+
+  //PUT / product/:id
+  app.put('/product/:_id', async (req, res)=>{
+    const {_id} = req.params;
+    const {name,description,price,Image,category,brand } = req.body;
+
+    await Product.updateOne({_id: _id},{$set:{
+      name: name,
+      description: description,
+      price: price,
+      Image: Image,
+      category: category,
+      brand: brand,
+  }});
+const updatedProduct = await Product.findById(_id);
+
+ res.json({
+  success:true,
+  data:updatedProduct,
+  message:"Product updated successfully"
+ });
+
+  });
+
+  //delet/ product/:id
+  app.delete('/product/:_id',async (req, res)=>{
+ const {_id} = req.params;
+ await Product.deleteOne({_id:_id});
+
+ res.json({
+  success:true, 
+  message: "Product deleted successfully"
+  })
+  });
+
+  // GET / productS/search?query
+  app.get('/products/search', async (req, res) => {
+    const {q}=req.query;
+   const products = await Product.find({name: {$regex: q,$options:"i"}});
+  res.json({
+    success:true,
+    data:products,
+    message:"Product fetched successfully"
+  });
   });
 
 

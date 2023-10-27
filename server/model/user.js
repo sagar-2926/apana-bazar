@@ -29,7 +29,10 @@ const userSchema = new Schema({
     type :'string',
     default:"Prefer not to say"
     },
-})
+},
+{
+    timestamps: true
+});
 
 const User = model("User", userSchema);
 
