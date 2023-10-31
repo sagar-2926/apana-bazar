@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './SignUpUser.css'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 function Signup() {
 
     const [name, setName] = useState("");
@@ -9,30 +10,30 @@ function Signup() {
     const [mobile, setMobile] = useState("");
     const [address, setAddress] = useState("");
     const [gender, setGender] = useState("male");
-     
+
     const signup = async () => {
-        if (!name){
+        if (!name) {
             alert("Name required");
             return;
         }
-        if (!email){
+        if (!email) {
             alert("Email required");
             return;
         }
-        if (!password){
+        if (!password) {
             alert("Password required");
             return;
         }
-        if (!mobile){
+        if (!mobile) {
             alert("Mobile required");
             return;
         }
-        if (!address){
+        if (!address) {
             alert("Address required");
             return;
         }
 
-        const response = await axios.post ("/Signup", {
+        const response = await axios.post("/Signup", {
             name: name,
             email: email,
             password: password,
@@ -42,10 +43,10 @@ function Signup() {
         })
 
         alert(response.data?.message);
-        if (response?.data?.sussecc){
+        if (response?.data?.sussecc) {
             window.location.href = "/Login";
         }
-    }   
+    }
 
     return (
         <>
@@ -76,7 +77,7 @@ function Signup() {
 
                 <div>
                     <label htmlFor='password'>password : </label>
-                    <input type='text'
+                    <input type='password'
                         className='signup-input'
                         placeholder='Enter your name'
                         id='password'
@@ -116,10 +117,10 @@ function Signup() {
                         name='gender'
                         className='gender'
                         checked={gender === "male"}
-                        onClick={()=>{
+                        onClick={() => {
                             setGender("male");
                         }}
-                         />
+                    />
                     <label htmlFor='male'>Male</label>
 
                     <input
@@ -127,21 +128,22 @@ function Signup() {
                         id='female'
                         name='gender'
                         className='gender'
-                        checked={gender ==="female"} 
-                        onClick={()=>{
+                        checked={gender === "female"}
+                        onClick={() => {
                             setGender("female");
                         }}
-                        />
+                    />
                     <label htmlFor='female'>Female</label>
                 </div>
 
-                    <button type='button' 
+                <button type='button'
                     className="signup-btn"
-                     onClick={signup}>
-                     SignUp</button>
+                    onClick={signup}>
+                    SignUp</button>
 
-
-
+                <p className='text-right signup-link'>
+                    <Link to='/login' >Alredy Have an Account</Link>
+                </p>
             </div>
 
         </>

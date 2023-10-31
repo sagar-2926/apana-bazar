@@ -1,6 +1,9 @@
 .text-center{
   text-align: center;
 }
+.text-right{
+  text-align: right;
+}
 .signup-input{
   height: 25px;
   width: 200px;

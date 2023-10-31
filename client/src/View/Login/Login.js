@@ -1,9 +1,73 @@
+import { useState } from 'react'
 import React from 'react'
-
+import './Login.css'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 function Login() {
-  return (
-    <div>Login</div>
-  )
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const Login = async () =>{
+  const response = await axios.post("./login" ,{
+    email: email,
+    password: password
+  });
+ 
+  alert(response?.data?.message);
+  if(response?.data?.success){
+    localStorage.setItem("user", JSON.stringify(response?.data?.data));
+    window.location.href ="./";
+  }
+
+
+
+    }
+    return (
+        <div>
+            <form className='login-form'>
+                <h1 className='text-center'>Login</h1>
+
+                <div>
+                    <label htmlFor='email'>Email : </label>
+                    <input type='text'
+                        className='signup-input'
+                        placeholder='Enter your email'
+                        id='email'
+                        value={email}
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }} />
+                </div>
+
+                <div>
+                    <label htmlFor='password'>password : </label>
+                    <input type='password'
+                        className='signup-input'
+                        placeholder='Enter your name'
+                        id='password'
+                        value={password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }} />
+                </div>
+               
+               <button 
+               type='button'
+                className='login-btn'
+                onClick={Login}
+               >
+               Login</button>
+
+
+              <p className='text-right signup-link'>
+             <Link to='/signup' >Create a New Account</Link>
+             </p>
+
+
+            </form>
+        </div>
+    )
 }
 
 export default Login

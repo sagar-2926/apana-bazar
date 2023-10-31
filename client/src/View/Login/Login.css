@@ -1,0 +1,23 @@
+.login-form{
+    height: auto;
+    width: fit-content;
+    margin: 20px auto;
+    padding: 10px 50px;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    box-shadow:0px 0px 10px 0px rgba(0,0,0,0.15) ;
+
+}
+.login-btn{
+    height: 35px;
+    width: 120px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}
+.signup-link{
+    color: black;
+    text-decoration: none;
+  }
