@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './View/Home/Home';
 import Login from "./View/Login/Login";
+import Myorder from './View/Myorder/Myorder';
 import SignUpUser from './View/SignUpUser/SignUpUser';
 import "./index.css"
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element:<Login />
+  },
+  {
+    path:'/myorder',
+    element:<Myorder />
   }
 ])
 root.render(<RouterProvider router={router}/>);

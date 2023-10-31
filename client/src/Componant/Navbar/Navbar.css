@@ -1,0 +1,32 @@
+.navbar{
+height: 50px;
+background-color:black;
+color: white;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 10px;
+}
+.app-title{
+    font-size: 25px;
+    font-family: serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+.navbar-link{
+    font-size: 20px;
+    font-family: serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    margin: 20px;
+}
+.logout{
+    font-size: 20px;
+    font-family: serif;
+    font-weight: bold;
+    margin: 20px;
+    color: white;
+    cursor: pointer;
+}

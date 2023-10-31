@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState ,useEffect } from 'react'
 import React from 'react'
 import './Login.css'
+import Navbar from '../../Componant/Navbar/Navbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 function Login() {
@@ -23,8 +24,18 @@ function Login() {
 
 
     }
+
+    useEffect(() =>{
+        const storageUser = JSON.parse(localStorage.getItem("user") || "{}");
+        if(storageUser?.email){
+            alert("You have already logged in");
+            window.location.href='/'
+        }
+    },[])
+
     return (
         <div>
+            < Navbar />
             <form className='login-form'>
                 <h1 className='text-center'>Login</h1>
 
