@@ -1,5 +1,4 @@
 .navbar{
-height: 50px;
 background-color:black;
 color: white;
 display: flex;
@@ -13,6 +12,10 @@ padding: 10px;
     font-weight: bold;
     text-decoration: none;
     color: white;
+}
+.navbar-links{
+    display: flex;
+    flex-wrap: wrap;
 }
 .navbar-link{
     font-size: 20px;
@@ -29,4 +32,16 @@ padding: 10px;
     margin: 20px;
     color: white;
     cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+.navbar{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.navbar-links{
+    display: flex;
+    flex-direction: column;
+}
+    
 }
