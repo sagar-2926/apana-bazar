@@ -15,8 +15,7 @@ const OrderSchema = new Schema({
     },
     status:{
         type:"string",
-        required:true
-        
+         default:"pending"        
     },
     shipingcharge:{
         type:"number",

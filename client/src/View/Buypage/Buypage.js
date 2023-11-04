@@ -8,7 +8,7 @@ function Buypage() {
     const { id } = useParams()
     const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
-    const [shippingaddress, setShippingAddress] = useState('');
+    const [address, setAddress] = useState('');
 
     const loadProduct = async () => {
         if (!id) {
@@ -35,10 +35,10 @@ function Buypage() {
         const currentUser = JSON.parse(localStorage.getItem('user') || "{}");
 
         const orderDetails = {
-            user: currentUser._id,
-            product: id,
+            user:currentUser._id,
+            product:id,
             quantity: quantity,
-            shippingaddress:shippingaddress,
+            address: address
         }
 
         const response = await axios.post('/order', orderDetails);
@@ -83,26 +83,19 @@ function Buypage() {
                 <div className="buypage-user-iformation">
                     <input type="text"
                         placeholder='enter your address'
-                        value={shippingaddress}
+                        value={address}
                         onChange={(e) => {
-                            setShippingAddress(e.target.value);
+                            setAddress(e.target.value);
                         }}
-                        className="signup-input"
+                        className="address-input"
                     />
 
                     <button type='button'
                         className='product-card-btn'
                         onClick={placeorder}>
-
                         Place order
                     </button>
-
-
-
-
                 </div>
-
-
             </div>
 
         </>
