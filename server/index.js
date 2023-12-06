@@ -3,12 +3,15 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Product from './model/products.js';
 import Order from './model/Order.js';
+import path from 'path';
 dotenv.config();
 
 import User from './model/user.js';
 
 const app = express();
 app.use(express.json());
+
+const __dirname = path.resolve();
 
 const connectDB = async () => {
   const conn = await mongoose.connect(process.env.MONGODB_URI);
@@ -296,6 +299,15 @@ app.get('/orders' ,async(req, res)=>{
   });
   
 });
+
+if (process.env.NODE_ENV === 'production'){
+app.use(express.static(path.join(__dirname,'..','client','build')));
+
+app.get('*',(req,res) => {
+  res.sendFile(path.join(__dirname,'..','client','build','index.html'))
+})
+
+}
 
 const PORT = process.env.PORT || 5000;
 
